@@ -1,0 +1,31 @@
+{
+  "source": "Synthetic reference problems, not product-specific assay specifications",
+  "binding_example": {
+    "receptor_nM": 100,
+    "total_ligand_nM": 10,
+    "kd_nM": 1,
+    "complex_nM": 9.890242272075156,
+    "exact_occupancy": 0.09890242272075156,
+    "incorrect_free_ligand_shortcut": 0.9090909090909091
+  },
+  "bead_count_example": {
+    "cells_per_ul": 15.0,
+    "ci95": [
+      12.27625843082485,
+      18.193146221323627
+    ]
+  },
+  "no_background_cells_for_95_percent_detection": 31533,
+  "background_aware_design": {
+    "n_cells": 30000,
+    "positive_threshold": 7,
+    "blank_false_positive_probability": 0.03350097375082747,
+    "power": 0.36956854223016367,
+    "naive_one_positive_blank_rate": 0.950220399630148
+  },
+  "assumptions": [
+    "Binding assumes one-to-one equilibrium in a well-mixed volume and consistent concentration units; no avidity or kinetics.",
+    "Bead interval conditions on total observed target+bead events; known bead addition/volume, independent Poisson sampling and representative mixing assumed. It excludes pipetting and viability uncertainty.",
+    "Rare-event calculations assume independent Bernoulli cell classifications, fixed sensitivity and false-positive rates. They do not establish an experimental LOD, product release threshold, or prevalence estimate."
+  ]
+}
