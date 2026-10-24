@@ -1,4 +1,4 @@
-# Biology problems
+# Scientific Analysis Cases: Cell-Therapy Mathematics and Inference
 
 Six reproducible cell-therapy analysis cases in two parts: assay mathematics (binding, counting beads, rare-cell detection) and inference pitfalls (absolute counts, technical replication, donor leakage).
 
