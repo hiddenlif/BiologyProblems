@@ -1,0 +1,59 @@
+{
+  "source": "Entirely synthetic, seeded teaching examples. No actual patient or product data.",
+  "cell_count_case": [
+    {
+      "condition": "Before",
+      "total_viable_cells": 1000000,
+      "target_events": 20000,
+      "parent_events": 100000,
+      "target_fraction": 0.2,
+      "absolute_target_cells": 200000.0
+    },
+    {
+      "condition": "After",
+      "total_viable_cells": 400000,
+      "target_events": 35000,
+      "parent_events": 100000,
+      "target_fraction": 0.35,
+      "absolute_target_cells": 140000.0
+    }
+  ],
+  "correct_donor_analysis": {
+    "n_donors": 8,
+    "mean_difference": 0.9969167018392264,
+    "t": 0.9195026269912787,
+    "df": 7,
+    "p_t": 0.3884197494400864,
+    "ci95": [
+      -1.5667882194837297,
+      3.5606216231621826
+    ],
+    "exact_sign_flip_p": 0.5234375
+  },
+  "deliberately_wrong_technical_pair_analysis": {
+    "n_pretended_independent_pairs": 96,
+    "p": 0.0010367743567186198,
+    "ci95": [
+      0.41220465671857276,
+      1.581628746959879
+    ]
+  },
+  "leakage_negative_control": {
+    "n_donors": 80,
+    "technical_rows": 640,
+    "sample_split_balanced_accuracy": 1.0,
+    "donor_split_balanced_accuracy": 0.43125,
+    "grouped_overlap_counts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "data_generating_truth": "No population-level feature/label relation; repeated donor fingerprints can leak donor-specific random labels."
+  },
+  "assumptions": [
+    "Absolute target estimate assumes representative sampling and an independently valid total viable count from the same sample.",
+    "Paired t interval assumes independent donors and an adequate model for donor differences; exact sign flips assume symmetric/exchangeable signs under the null.",
+    "One fixed null simulation is a negative control, not a population generalization guarantee."
+  ]
+}

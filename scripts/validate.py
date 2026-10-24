@@ -15,21 +15,23 @@ subprocess.run([sys.executable, "analysis.py"], check=True)
 from nbclient import NotebookClient
 import nbformat
 
-nb = nbformat.read(root / "notebooks/analysis.ipynb", as_version=4)
-NotebookClient(
-    nb, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(root)}}
-).execute()
-nbformat.validate(nb)
-# Preserve warning text while making environment paths portable.
-for cell in nb.cells:
-    for output in cell.get("outputs", []):
-        if output.get("output_type") == "stream":
-            output["text"] = (
-                output["text"]
-                .replace(sys.prefix, "<python-env>")
-                .replace(str(root), "<repo>")
-            )
-nbformat.write(nb, root / "notebooks/analysis.executed.ipynb")
+NOTEBOOKS = ["assay_math", "inference_pitfalls"]
+for name in NOTEBOOKS:
+    nb = nbformat.read(root / f"notebooks/{name}.ipynb", as_version=4)
+    NotebookClient(
+        nb, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(root)}}
+    ).execute()
+    nbformat.validate(nb)
+    # Preserve warning text while making environment paths portable.
+    for cell in nb.cells:
+        for output in cell.get("outputs", []):
+            if output.get("output_type") == "stream":
+                output["text"] = (
+                    output["text"]
+                    .replace(sys.prefix, "<python-env>")
+                    .replace(str(root), "<repo>")
+                )
+    nbformat.write(nb, root / f"notebooks/{name}.executed.ipynb")
 import xml.etree.ElementTree as ET
 
 suite = ET.parse(root / "artifacts/pytest.xml").getroot().find("testsuite")
@@ -42,10 +44,13 @@ receipt = {
     ).hexdigest(),
     "python": platform.python_version(),
     "notebook": "executed without cell errors",
-    "summary_sha256": hashlib.sha256(
-        (root / "artifacts/run/summary.json").read_bytes()
-    ).hexdigest(),
-    "analysis_sha256": hashlib.sha256((root / "analysis.py").read_bytes()).hexdigest(),
+    "summary_sha256": {
+        name: hashlib.sha256((root / f"artifacts/run/{name}/summary.json").read_bytes()).hexdigest()
+        for name in NOTEBOOKS
+    },
+    "analysis_sha256": {
+        name: hashlib.sha256((root / f"{name}.py").read_bytes()).hexdigest() for name in NOTEBOOKS
+    },
 }
 (root / "artifacts/validation.json").write_text(json.dumps(receipt, indent=2) + "\n")
 print(json.dumps(receipt, indent=2))

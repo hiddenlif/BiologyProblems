@@ -1,4 +1,4 @@
-# Executed findings: Biology problems
+# Executed findings: assay mathematics
 
 Three original synthetic problems grounded in cell-therapy assay mathematics. These are educational reference solutions, not product specifications.
 

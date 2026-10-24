@@ -1,0 +1,3 @@
+condition,total_viable_cells,target_events,parent_events,target_fraction,absolute_target_cells
+Before,1000000,20000,100000,0.2,200000.0
+After,400000,35000,100000,0.35,140000.0

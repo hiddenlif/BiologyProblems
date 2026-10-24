@@ -1,6 +1,6 @@
 {
   "pytest": {
-    "tests": 37,
+    "tests": 61,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -8,6 +8,12 @@
   "requirements_sha256": "4baadedf21602e8df012007715afadde087c165ccc05d91e853f328ae0d2bfb2",
   "python": "3.13.15",
   "notebook": "executed without cell errors",
-  "summary_sha256": "20557eb71dbe5da9a43118a03af06627f1d4d506281ff3ad12fa024ec4dee3f8",
-  "analysis_sha256": "1b651fbc9cdceedc10bed06cd874508d42113827117ecc6d8813a9610ee22f9e"
+  "summary_sha256": {
+    "assay_math": "20557eb71dbe5da9a43118a03af06627f1d4d506281ff3ad12fa024ec4dee3f8",
+    "inference_pitfalls": "4b33f93eceaea85058dbd6758e8b7a7946fcb5d588c253007513764e62341a80"
+  },
+  "analysis_sha256": {
+    "assay_math": "74c64d9e13db549f88affbb244c0586c983dc0dab990b5397cf0c1b7681d05c1",
+    "inference_pitfalls": "67658d25f57f576adaa81abc2e65e9a090533dbfbad16687456152ecac0d3034"
+  }
 }
