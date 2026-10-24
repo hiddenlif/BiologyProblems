@@ -13,7 +13,7 @@
     "inference_pitfalls": "4b33f93eceaea85058dbd6758e8b7a7946fcb5d588c253007513764e62341a80"
   },
   "analysis_sha256": {
-    "assay_math": "74c64d9e13db549f88affbb244c0586c983dc0dab990b5397cf0c1b7681d05c1",
-    "inference_pitfalls": "67658d25f57f576adaa81abc2e65e9a090533dbfbad16687456152ecac0d3034"
+    "assay_math": "7528dfda77caedff1bf807f221603739cb931c44e0f1701e4a36806d9e57b395",
+    "inference_pitfalls": "4b8462c5c72db6955c79f83a2889ec2dc437297624f5279e0aa1c34367ad03d6"
   }
 }

@@ -1,5 +1,10 @@
+import hashlib
+import json
+import os
+import platform
+import subprocess
+import sys
 from pathlib import Path
-import sys, subprocess, json, os, hashlib, platform
 
 root = Path(__file__).resolve().parents[1]
 os.chdir(root)
@@ -12,14 +17,17 @@ subprocess.run(
     check=True,
 )
 subprocess.run([sys.executable, "analysis.py"], check=True)
-from nbclient import NotebookClient
 import nbformat
+from nbclient import NotebookClient
 
 NOTEBOOKS = ["assay_math", "inference_pitfalls"]
 for name in NOTEBOOKS:
     nb = nbformat.read(root / f"notebooks/{name}.ipynb", as_version=4)
     NotebookClient(
-        nb, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(root)}}
+        nb,
+        timeout=600,
+        kernel_name="python3",
+        resources={"metadata": {"path": str(root)}},
     ).execute()
     nbformat.validate(nb)
     # Preserve warning text while making environment paths portable.
@@ -45,11 +53,14 @@ receipt = {
     "python": platform.python_version(),
     "notebook": "executed without cell errors",
     "summary_sha256": {
-        name: hashlib.sha256((root / f"artifacts/run/{name}/summary.json").read_bytes()).hexdigest()
+        name: hashlib.sha256(
+            (root / f"artifacts/run/{name}/summary.json").read_bytes()
+        ).hexdigest()
         for name in NOTEBOOKS
     },
     "analysis_sha256": {
-        name: hashlib.sha256((root / f"{name}.py").read_bytes()).hexdigest() for name in NOTEBOOKS
+        name: hashlib.sha256((root / f"{name}.py").read_bytes()).hexdigest()
+        for name in NOTEBOOKS
     },
 }
 (root / "artifacts/validation.json").write_text(json.dumps(receipt, indent=2) + "\n")

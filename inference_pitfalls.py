@@ -1,20 +1,22 @@
 """Inference pitfalls in cell-therapy analysis: absolute counts, technical replication and donor leakage. Controlled synthetic cases; not patient data or evidence of treatment efficacy."""
 
+import itertools
+import json
 from pathlib import Path
-import itertools, json
+
+import matplotlib
 import numpy as np
 import pandas as pd
 from scipy import stats
-import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.model_selection import GroupKFold, StratifiedKFold, cross_val_predict
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import GroupKFold, StratifiedKFold, cross_val_predict
-from sklearn.metrics import balanced_accuracy_score
 
 ROOT = Path(__file__).parent
 
@@ -92,7 +94,7 @@ def make_pairs(seed=20261022):
             for condition, offset in [("control", 0), ("treated", effect)]:
                 rows.append(
                     {
-                        "donor": f"D{i+1:02}",
+                        "donor": f"D{i + 1:02}",
                         "replicate": rep,
                         "condition": condition,
                         "value": baseline + offset + rng.normal(0, 0.08),

@@ -1,13 +1,14 @@
 import numpy as np
 import pytest
 from scipy import optimize, stats
+
 from assay_math import (
-    complex_concentration,
-    occupancy,
-    ratio_interval,
     bead_count,
+    complex_concentration,
     minimum_cells_no_background,
+    occupancy,
     rare_event_design,
+    ratio_interval,
 )
 
 

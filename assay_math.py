@@ -1,11 +1,13 @@
 """Assay mathematics for cell therapy: binding, counting beads and rare-event detection. Synthetic values only."""
 
+import json
+import math
 from pathlib import Path
-import json, math
+
+import matplotlib
 import numpy as np
 import pandas as pd
-from scipy import stats, optimize
-import matplotlib
+from scipy import optimize, stats
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -131,7 +133,7 @@ def run(output=ROOT / "artifacts/run"):
     for ligand in [0.01, 1, 10, 100, 1000]:
         exact = complex_concentration(r, ligand, k)
         root = optimize.brentq(
-            lambda c: (r - c) * (ligand - c) - k * c, 0, min(r, ligand)
+            lambda c, ligand=ligand: (r - c) * (ligand - c) - k * c, 0, min(r, ligand)
         )
         assert np.isclose(exact, root, rtol=1e-9, atol=1e-10)
     fig, ax = plt.subplots(figsize=(8, 5))

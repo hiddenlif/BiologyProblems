@@ -1,8 +1,9 @@
 import numpy as np
-import pytest
 import pandas as pd
+import pytest
 from scipy import stats
-from inference_pitfalls import target_count, paired_summary, make_pairs, leakage_case
+
+from inference_pitfalls import leakage_case, make_pairs, paired_summary, target_count
 
 
 def test_counts_hand_calculated():
